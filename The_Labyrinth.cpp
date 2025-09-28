@@ -20,7 +20,6 @@ int main()
     std::cin >> r >> c >> a; std::cin.ignore();
 
     std::vector<std::string> maze(r);           //лабиринт
-    std::vector<std::vector<Path>> paths(r);    //пути до точек лабиринта от Кирка
     Point C{-1, -1};                            //координаты комнаты управления
     Point T{-1, -1};                            //кординаты начальной точки
     bool reachC{false};
@@ -45,13 +44,6 @@ int main()
             }
         }
 
-        //Очищаем вектор путей
-        for(int i=0; i < r; i++){
-            paths[i].clear();
-            paths[i].resize(c);
-        }
-
-
         //Выбор цели поиска
         char goal{'Q'};
         if(C.c != -1 && !reachC){
@@ -61,6 +53,7 @@ int main()
             goal = 'T';
         }
 
+        std::vector<std::vector<Path>> paths(r);    //пути до точек лабиринта от Кирка
         //Поиск в ширину для 'C' и 'T'
         Point K{kr, kc};
         if( ( C.c != -1 && !reachC) || reachC ){
